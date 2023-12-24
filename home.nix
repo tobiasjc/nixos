@@ -36,7 +36,7 @@
       gradle-completion
       jdk
       ant
-        
+
       # zig
       zig
       zig-shell-completions
@@ -49,6 +49,7 @@
       vscode
 
       # Utils
+      nixpkgs-fmt
       aria
       zip
       p7zip
@@ -56,47 +57,43 @@
   };
 
   # Programs configurations
-  programs = {
-    home-manager.enable = true;
-    bash.enable = true;
-    
-    
-    starship = {
-      enable = true;
-      
-      settings = {
-        add_newline = true;
-        
-        character = {
-          success_symbol = "[➜](bold green)";
-          error_symbol = "[➜](bold red)";
-        };
+  programs.starship = {
+    enable = true;
+    settings = {
+      add_newline = true;
 
-        cmd_duration = {
-          disabled = false;
-          min_time = 0;
-        };
-
-        # os = {
-        #   disabled = false;
-        # };
+      character = {
+        success_symbol = "[➜](bold green)";
+        error_symbol = "[➜](bold red)";
       };
-    };
 
-    direnv = {
-      enable = true;
-      enableBashIntegration = true;
-      nix-direnv = {
-        enable = true;
+      cmd_duration = {
+        disabled = false;
+        min_time = 0;
+      };
+
+      os = {
+        disabled = false;
       };
     };
   };
 
-  # Dconf configuration to save virt-manager configs
+  programs.home-manager.enable = true;
+  programs.bash.enable = true;
+
+  programs.direnv = {
+    enable = true;
+    enableBashIntegration = true;
+    nix-direnv = {
+      enable = true;
+    };
+  };
+
+  # dconf configuration to save virt-manager configs
   dconf.settings = {
     "org/virt-manager/virt-manager/connections" = {
-    autoconnect = ["qemu:///system"];
-    uris = ["qemu:///system"];
+      autoconnect = [ "qemu:///system" ];
+      uris = [ "qemu:///system" ];
     };
   };
 
