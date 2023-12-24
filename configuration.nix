@@ -70,9 +70,6 @@
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
-  # Enable flatpak.
-  services.flatpak.enable = true;
-
   # Enable sound with pipewire.
   sound.enable = true;
   hardware.pulseaudio.enable = false;
@@ -115,7 +112,6 @@
     vim
     wget
     tmux
-    home-manager
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -144,7 +140,7 @@
 
   # NVIDIA
   # Load nvidia driver for Xorg and Wayland
-  services.xserver.videoDrivers = ["nvidia"];
+  services.xserver.videoDrivers = [ "nvidia" ];
 
   hardware.nvidia = {
     # Modesetting is required.
@@ -179,6 +175,37 @@
     isNormalUser = true;
     description = "José Tobias";
     extraGroups = [ "networkmanager" "wheel" "docker" "libvirtd" ];
+    shell = pkgs.bash;
+  };
+
+  programs.steam = {
+    enable = true;
+    remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
+    dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
+  };
+
+  # Flatpak
+  services.flatpak.enable = true;
+
+  # Fonts
+  fonts = {
+    packages = with pkgs; [
+      nerdfonts
+      noto-fonts
+      noto-fonts-cjk-sans
+      noto-fonts-cjk-serif
+      noto-fonts-emoji
+      noto-fonts-color-emoji
+    ];
+
+    fontconfig = {
+      enable = true;
+
+      defaultFonts = {
+        monospace = [ "CaskaydiaCove Nerd Font Mono" ];
+        emoji = [ "CaskaydiaCove Nerd Font Mono" ];
+      };
+    };
   };
 
   # This value determines the NixOS release from which the default
