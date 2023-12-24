@@ -2,57 +2,58 @@
   # Allow unfree
   nixpkgs.config.allowUnfree = true;
 
-  fonts.fontconfig.enable = true;
+  programs.home-manager.enable = true;
+  programs.bash.enable = true;
 
   home = {
     username = "jtobias";
-    homeDirectory = "/home/jtobias";
+    homeDirectory = "/home/jtobias/";
 
     packages = with pkgs; [
-      # Browsers
-      firefox
+      # web
       google-chrome
-      opera
-
-      # Mail
+      firefox
+      (opera.override { proprietaryCodecs = true; })
+      # mail
       thunderbird
-
-      # Editors
+      # editors
       neovim
       emacs
-
+      vscode
+      # virtualisation
       virt-manager
       dconf
-
-      # Code Management
+      # development
       git
       lazygit
-
-      # Development
       jetbrains-toolbox
       minikube
-      # java
       gradle
       gradle-completion
       jdk
       ant
-
-      # zig
       zig
       zig-shell-completions
-
-      # Shell
       fastfetch
-      nerdfonts
-
-      # General
-      vscode
-
-      # Utils
       nixpkgs-fmt
+      # codecs
+      ffmpeg
+      openh264
+      mediastreamer
+      mediastreamer-openh264
+      gst_all_1.gst-libav
+      gst_all_1.gstreamer
+      # cuda libraries
+      # cudaPackages.cudatoolkit
+      # cudaPackages.cutensor
+      # cudaPackages.tensorrt
+      # utils
+      bc
+      kalker
       aria
       zip
       p7zip
+      steam
     ];
   };
 
@@ -62,9 +63,19 @@
     settings = {
       add_newline = true;
 
-      character = {
-        success_symbol = "[➜](bold green)";
-        error_symbol = "[➜](bold red)";
+      time = {
+        disabled = false;
+      };
+
+      username = {
+        disabled = false;
+        show_always = true;
+      };
+
+      status = {
+        disabled = false;
+        pipestatus = true;
+        map_symbol = true;
       };
 
       cmd_duration = {
@@ -77,9 +88,6 @@
       };
     };
   };
-
-  programs.home-manager.enable = true;
-  programs.bash.enable = true;
 
   programs.direnv = {
     enable = true;
