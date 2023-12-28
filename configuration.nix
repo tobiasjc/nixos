@@ -119,8 +119,9 @@
   # Remember to always have a system level terminal text editor...
   # Nano is... not VIM.
   programs.neovim = {
-    defaultEditor = true;
     enable = true;
+    defaultEditor = true;
+
     vimAlias = true;
     viAlias = true;
   };
