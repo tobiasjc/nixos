@@ -61,8 +61,8 @@
     layout = "br";
     xkbVariant = "";
   };
-  services.xserver.autoRepeatDelay = 150;
-  services.xserver.autoRepeatInterval = 25;
+  services.xserver.autoRepeatDelay = 250;
+  services.xserver.autoRepeatInterval = 30;
 
   # Configure console keymap
   console.keyMap = "br-abnt2";
@@ -107,12 +107,23 @@
     libvirtd.enable = true;
   };
 
+  # Packaging
+  services.flatpak.enable = true;
+
   # List packages installed in system profile. To search, run:
   environment.systemPackages = with pkgs; [
-    vim
     wget
-    tmux
+    curl
   ];
+
+  # Remember to always have a system level terminal text editor...
+  # Nano is... not VIM.
+  programs.neovim = {
+    defaultEditor = true;
+    enable = true;
+    vimAlias = true;
+    viAlias = true;
+  };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -131,6 +142,13 @@
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 
+  # Fun
+  programs.steam = {
+    enable = true;
+    remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
+    dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
+  };
+
   # Enable OpenGL
   hardware.opengl = {
     enable = true;
@@ -139,7 +157,7 @@
   };
 
   # NVIDIA
-  # Load nvidia driver for Xorg and Wayland
+  Load nvidia driver for Xorg and Wayland
   services.xserver.videoDrivers = [ "nvidia" ];
 
   hardware.nvidia = {
@@ -170,23 +188,6 @@
     package = config.boot.kernelPackages.nvidiaPackages.stable;
   };
 
-  # Define MY user account. Don't forget to set a password with ‘passwd’.
-  users.users.jtobias = {
-    isNormalUser = true;
-    description = "José Tobias";
-    extraGroups = [ "networkmanager" "wheel" "docker" "libvirtd" ];
-    shell = pkgs.bash;
-  };
-
-  programs.steam = {
-    enable = true;
-    remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
-    dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
-  };
-
-  # Flatpak
-  services.flatpak.enable = true;
-
   # Fonts
   fonts = {
     packages = with pkgs; [
@@ -203,9 +204,16 @@
 
       defaultFonts = {
         monospace = [ "CaskaydiaCove Nerd Font Mono" ];
-        emoji = [ "CaskaydiaCove Nerd Font Mono" ];
       };
     };
+  };
+
+  # Define MY user account. Don't forget to set a password with ‘passwd’.
+  users.users.jtobias = {
+    isNormalUser = true;
+    description = "José Tobias";
+    extraGroups = [ "networkmanager" "wheel" "docker" "libvirtd" ];
+    shell = pkgs.bash;
   };
 
   # This value determines the NixOS release from which the default

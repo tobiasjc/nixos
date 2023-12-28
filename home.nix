@@ -6,9 +6,6 @@
   programs.bash.enable = true;
 
   home = {
-    username = "jtobias";
-    homeDirectory = "/home/jtobias/";
-
     packages = with pkgs; [
       # web
       google-chrome
@@ -17,24 +14,23 @@
       # mail
       thunderbird
       # editors
-      neovim
       emacs
       vscode
       # virtualisation
       virt-manager
+      minikube
       dconf
       # development
-      git
+      tmux
+      gitFull
       lazygit
       jetbrains-toolbox
-      minikube
       gradle
       gradle-completion
       jdk
       ant
       zig
       zig-shell-completions
-      fastfetch
       nixpkgs-fmt
       # codecs
       ffmpeg
@@ -48,12 +44,12 @@
       # cudaPackages.cutensor
       # cudaPackages.tensorrt
       # utils
+      fastfetch
       bc
       kalker
       aria
       zip
       p7zip
-      steam
     ];
   };
 
