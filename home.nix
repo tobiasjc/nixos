@@ -8,9 +8,12 @@
   home = {
     packages = with pkgs; [
       # web
+      (opera.override { proprietaryCodecs = true; })
       google-chrome
       firefox
-      (opera.override { proprietaryCodecs = true; })
+      tor-browser
+      palemoon-bin
+      netsurf.browser
       # mail
       thunderbird
       # editors
@@ -31,6 +34,8 @@
       ant
       zig
       zig-shell-completions
+      rclone
+      rclone-browser
       nixpkgs-fmt
       # codecs
       ffmpeg
@@ -50,6 +55,7 @@
       aria
       zip
       p7zip
+      keepassxc
     ];
   };
 

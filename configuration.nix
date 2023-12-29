@@ -7,6 +7,9 @@
     ./hardware-configuration.nix
   ];
 
+  # Allow unfree packages
+  nixpkgs.config.allowUnfree = true;
+
   # boot - loader
   boot.loader.grub = {
     enable = true;
@@ -26,6 +29,14 @@
 
   # Enable networking
   networking.networkmanager.enable = true;
+
+  # Define MY user account. Don't forget to set a password with ‘passwd’.
+  users.users.jtobias = {
+    isNormalUser = true;
+    description = "José Tobias";
+    extraGroups = [ "networkmanager" "wheel" "docker" "libvirtd" ];
+    shell = pkgs.bash;
+  };
 
   # Set your time zone.
   time.timeZone = "America/Sao_Paulo";
@@ -80,7 +91,7 @@
     alsa.support32Bit = true;
     pulse.enable = true;
     # If you want to use JACK applications, uncomment this
-    #jack.enable = true;
+    jack.enable = true;
 
     # use the example session manager (no others are packaged yet so this is enabled by default,
     # no need to redefine it in your config for now)
@@ -89,9 +100,6 @@
 
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
-
-  # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
 
   # Allow experimental features
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
@@ -117,7 +125,7 @@
   ];
 
   # Remember to always have a system level terminal text editor...
-  # Nano is... not VIM.
+  # NANO is... not VIM.
   programs.neovim = {
     enable = true;
     defaultEditor = true;
@@ -136,6 +144,8 @@
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
+
+
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
@@ -209,12 +219,30 @@
     };
   };
 
-  # Define MY user account. Don't forget to set a password with ‘passwd’.
-  users.users.jtobias = {
-    isNormalUser = true;
-    description = "José Tobias";
-    extraGroups = [ "networkmanager" "wheel" "docker" "libvirtd" ];
-    shell = pkgs.bash;
+  # Always good to have a HTTP server
+  networking.firewall.allowedTCPPorts = [ 80 443 ];
+  services.nginx = {
+    enable = true;
+
+    virtualHosts."localhost" = {
+      root = "/var/www/localhost";
+      locations."~ \\.php$".extraConfig = ''
+        fastcgi_pass  unix:${config.services.phpfpm.pools.jtobias.socket};
+        fastcgi_index index.php;
+      '';
+    };
+  };
+  services.phpfpm.pools.jtobias = {
+    user = "jtobias";
+    settings = {
+      "pm" = "dynamic";
+      "listen.owner" = config.services.nginx.user;
+      "pm.max_children" = 5;
+      "pm.start_servers" = 2;
+      "pm.min_spare_servers" = 1;
+      "pm.max_spare_servers" = 3;
+      "pm.max_requests" = 500;
+    };
   };
 
   # This value determines the NixOS release from which the default
