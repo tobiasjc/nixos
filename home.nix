@@ -25,7 +25,7 @@
       dconf
       # development
       tmux
-      gitFull
+      gitFull # for git we live
       lazygit
       jetbrains-toolbox
       gradle

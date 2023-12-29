@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }: {
+{ config, pkgs, lib, ... }: {
   imports = [
     ./hardware-configuration.nix
   ];
@@ -14,7 +14,7 @@
   boot.loader.grub = {
     enable = true;
     useOSProber = true;
-    device = "/dev/vda";
+    device = "/dev/sda";
   };
 
   # boot - kernel modules
@@ -101,7 +101,7 @@
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
-  # Allow experimental features
+  # Allow experimental features by default
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   # Virtualisation
@@ -122,6 +122,7 @@
   environment.systemPackages = with pkgs; [
     wget
     curl
+    gitFull # we live for git
   ];
 
   # Remember to always have a system level terminal text editor...
@@ -145,8 +146,6 @@
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
 
-
-
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
@@ -168,7 +167,7 @@
   };
 
   # NVIDIA
-  Load nvidia driver for Xorg and Wayland
+  # Load nvidia driver for Xorg and Wayland
   services.xserver.videoDrivers = [ "nvidia" ];
 
   hardware.nvidia = {
@@ -219,29 +218,53 @@
     };
   };
 
-  # Always good to have a HTTP server
+  # Always good to have an easy HTTP server just because
   networking.firewall.allowedTCPPorts = [ 80 443 ];
-  services.nginx = {
-    enable = true;
 
-    virtualHosts."localhost" = {
-      root = "/var/www/localhost";
-      locations."~ \\.php$".extraConfig = ''
-        fastcgi_pass  unix:${config.services.phpfpm.pools.jtobias.socket};
-        fastcgi_index index.php;
-      '';
+  # phpfpm
+  services.phpfpm = {
+    # good to have extensions
+    phpOptions = ''
+      extension=${pkgs.phpExtensions.apcu}/lib/php/extensions/apcu.so
+      extension=${pkgs.phpExtensions.bz2}/lib/php/extensions/bz2.so
+    '';
+
+    pools.localhost = {
+      user = "jtobias";
+      group = "users";
+
+      settings = {
+        "listen.owner" = config.services.httpd.user;
+        "pm" = "dynamic";
+        "pm.max_children" = 32;
+        "pm.max_requests" = 500;
+        "pm.start_servers" = 2;
+        "pm.min_spare_servers" = 2;
+        "pm.max_spare_servers" = 5;
+        "php_admin_value[error_log]" = "stderr";
+        "php_admin_flag[log_errors]" = true;
+        "catch_workers_output" = true;
+      };
+      phpEnv."PATH" = lib.makeBinPath [ pkgs.php ];
     };
   };
-  services.phpfpm.pools.jtobias = {
-    user = "jtobias";
-    settings = {
-      "pm" = "dynamic";
-      "listen.owner" = config.services.nginx.user;
-      "pm.max_children" = 5;
-      "pm.start_servers" = 2;
-      "pm.min_spare_servers" = 1;
-      "pm.max_spare_servers" = 3;
-      "pm.max_requests" = 500;
+
+  # httpd
+  services.httpd = {
+    enable = true;
+    extraModules = [
+      # setup proxy for fcgi
+      "proxy"
+      "proxy_fcgi"
+    ];
+
+    virtualHosts."localhost" = {
+      documentRoot = "/srv/www/localhost";
+      extraConfig = ''
+        <FilesMatch \.php$>
+          SetHandler "proxy:unix:${config.services.phpfpm.pools.localhost.socket}|fcgi://localhost/"
+        </FilesMatch>
+      '';
     };
   };
 
