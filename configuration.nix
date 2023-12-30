@@ -2,19 +2,31 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, lib, ... }: {
+{ config, pkgs, ... }: {
   imports = [
     ./hardware-configuration.nix
+    # Personal imports
+    ./imports/services/flatpak
+    ./imports/fonts
+    ./imports/services/httpd
+    ./imports/services/kafka
+    # ./imports/hardware/nvidia.nix
+    ./imports/programs/steam
+    ./imports/programs/vim
+    ./imports/virtualisation/docker
+    ./imports/virtualisation/libvirtd
+    ./imports/virtualisation/virt-manager
   ];
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
+  nixpkgs.config.allowUnfreePredicate = _: true; # for standalone software
 
   # boot - loader
   boot.loader.grub = {
     enable = true;
     useOSProber = true;
-    device = "/dev/sda";
+    device = "/dev/vda";
   };
 
   # boot - kernel modules
@@ -22,6 +34,9 @@
 
   networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+
+  # Allow experimental features by default
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
@@ -101,39 +116,12 @@
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
-  # Allow experimental features by default
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
-
-  # Virtualisation
-  virtualisation = {
-    docker = {
-      enable = true;
-      # only if you're using btrfs!
-      # storageDriver = "btrfs";
-    };
-
-    libvirtd.enable = true;
-  };
-
-  # Packaging
-  services.flatpak.enable = true;
-
   # List packages installed in system profile. To search, run:
   environment.systemPackages = with pkgs; [
     wget
     curl
     gitFull # we live for git
   ];
-
-  # Remember to always have a system level terminal text editor...
-  # NANO is... not VIM.
-  programs.neovim = {
-    enable = true;
-    defaultEditor = true;
-
-    vimAlias = true;
-    viAlias = true;
-  };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -152,121 +140,6 @@
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 
-  # Fun
-  programs.steam = {
-    enable = true;
-    remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
-    dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
-  };
-
-  # Enable OpenGL
-  hardware.opengl = {
-    enable = true;
-    driSupport = true;
-    driSupport32Bit = true;
-  };
-
-  # NVIDIA
-  # Load nvidia driver for Xorg and Wayland
-  services.xserver.videoDrivers = [ "nvidia" ];
-
-  hardware.nvidia = {
-    # Modesetting is required.
-    modesetting.enable = true;
-
-    # Nvidia power management. Experimental, and can cause sleep/suspend to fail.
-    powerManagement.enable = false;
-
-    # Fine-grained power management. Turns off GPU when not in use.
-    # Experimental and only works on modern Nvidia GPUs (Turing or newer).
-    powerManagement.finegrained = false;
-
-    # Use the NVidia open source kernel module (not to be confused with the
-    # independent third-party "nouveau" open source driver).
-    # Support is limited to the Turing and later architectures. Full list of 
-    # supported GPUs is at: 
-    # https://github.com/NVIDIA/open-gpu-kernel-modules#compatible-gpus 
-    # Only available from driver 515.43.04+
-    # Currently alpha-quality/buggy, so false is currently the recommended setting.
-    open = false;
-
-    # Enable the Nvidia settings menu,
-    # accessible via `nvidia-settings`.
-    nvidiaSettings = true;
-
-    # Optionally, you may need to select the appropriate driver version for your specific GPU.
-    package = config.boot.kernelPackages.nvidiaPackages.stable;
-  };
-
-  # Fonts
-  fonts = {
-    packages = with pkgs; [
-      nerdfonts
-      noto-fonts
-      noto-fonts-cjk-sans
-      noto-fonts-cjk-serif
-      noto-fonts-emoji
-      noto-fonts-color-emoji
-    ];
-
-    fontconfig = {
-      enable = true;
-
-      defaultFonts = {
-        monospace = [ "CaskaydiaCove Nerd Font Mono" ];
-      };
-    };
-  };
-
-  # Always good to have an easy HTTP server just because
-  networking.firewall.allowedTCPPorts = [ 80 443 ];
-
-  # phpfpm
-  services.phpfpm = {
-    # good to have extensions
-    phpOptions = ''
-      extension=${pkgs.phpExtensions.apcu}/lib/php/extensions/apcu.so
-      extension=${pkgs.phpExtensions.bz2}/lib/php/extensions/bz2.so
-    '';
-
-    pools.localhost = {
-      user = "jtobias";
-      group = "users";
-
-      settings = {
-        "listen.owner" = config.services.httpd.user;
-        "pm" = "dynamic";
-        "pm.max_children" = 32;
-        "pm.max_requests" = 500;
-        "pm.start_servers" = 2;
-        "pm.min_spare_servers" = 2;
-        "pm.max_spare_servers" = 5;
-        "php_admin_value[error_log]" = "stderr";
-        "php_admin_flag[log_errors]" = true;
-        "catch_workers_output" = true;
-      };
-      phpEnv."PATH" = lib.makeBinPath [ pkgs.php ];
-    };
-  };
-
-  # httpd
-  services.httpd = {
-    enable = true;
-    extraModules = [
-      # setup proxy for fcgi
-      "proxy"
-      "proxy_fcgi"
-    ];
-
-    virtualHosts."localhost" = {
-      documentRoot = "/srv/www/localhost";
-      extraConfig = ''
-        <FilesMatch \.php$>
-          SetHandler "proxy:unix:${config.services.phpfpm.pools.localhost.socket}|fcgi://localhost/"
-        </FilesMatch>
-      '';
-    };
-  };
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

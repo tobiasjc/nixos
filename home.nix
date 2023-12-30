@@ -1,6 +1,7 @@
 { pkgs, ... }: {
   # Allow unfree
   nixpkgs.config.allowUnfree = true;
+  nixpkgs.config.allowUnfreePredicate = _: true; # for standalone software
 
   programs.home-manager.enable = true;
   programs.bash.enable = true;
@@ -20,9 +21,7 @@
       emacs
       vscode
       # virtualisation
-      virt-manager
       minikube
-      dconf
       # development
       tmux
       gitFull # for git we live
