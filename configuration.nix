@@ -23,14 +23,14 @@
   nixpkgs.config.allowUnfreePredicate = _: true; # for standalone software
 
   # boot - loader
-  boot.loader.grub = {
-    enable = true;
-    useOSProber = true;
-    device = "/dev/vda";
+  boot = {
+    kernelModules = [ "kvm-amd" "kvm-intel" ];
+    loader.grub = {
+      enable = true;
+      useOSProber = true;
+      device = "/dev/vda";
+    };
   };
-
-  # boot - kernel modules
-  boot.kernelModules = [ "kvm-amd" "kvm-intel" ];
 
   networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -86,9 +86,9 @@
   services.xserver = {
     layout = "br";
     xkbVariant = "";
+    autoRepeatDelay = 250;
+    autoRepeatInterval = 30;
   };
-  services.xserver.autoRepeatDelay = 250;
-  services.xserver.autoRepeatInterval = 30;
 
   # Configure console keymap
   console.keyMap = "br-abnt2";
@@ -120,8 +120,21 @@
   environment.systemPackages = with pkgs; [
     wget
     curl
-    gitFull # we live for git
   ];
+
+  # Git, we live for it
+  programs.git = {
+    enable = true;
+    lfs.enable = true;
+    config = {
+      init = {
+        defaultBranch = "main";
+      };
+      credential = {
+        helper = "cache";
+      };
+    };
+  };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -131,7 +144,7 @@
     enableSSHSupport = true;
   };
 
-  # Enable the OpenSSH daemon.
+  # Enable the OpenSSH daemon and agent
   services.openssh.enable = true;
 
   # Open ports in the firewall.
@@ -139,7 +152,6 @@
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
-
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
