@@ -15,10 +15,16 @@
   # boot - loader
   boot = {
     kernelModules = [ "kvm-amd" "kvm-intel" ];
-    loader.grub = {
-      enable = true;
-      useOSProber = true;
-      device = "/dev/sda";
+    loader = {
+      efi = {
+        canTouchEfiVariables = true;
+        efiSysMountPoint = "/boot/efi";
+      };
+      grub = {
+        efiSupport = true;
+        useOSProber = true;
+        device = "nodev";
+      };
     };
   };
 
