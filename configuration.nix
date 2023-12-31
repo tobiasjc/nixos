@@ -5,17 +5,7 @@
 { config, pkgs, ... }: {
   imports = [
     ./hardware-configuration.nix
-    # Personal imports
-    ./imports/services/flatpak
-    ./imports/fonts
-    ./imports/services/httpd
-    ./imports/services/kafka
-    # ./imports/hardware/nvidia.nix
-    ./imports/programs/steam
-    ./imports/programs/vim
-    ./imports/virtualisation/docker
-    ./imports/virtualisation/libvirtd
-    ./imports/virtualisation/virt-manager
+    ./imports
   ];
 
   # Allow unfree packages
@@ -72,9 +62,6 @@
     };
   };
 
-  # Some programs might need it to configure themselves
-  programs.dconf.enable = true;
-
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
@@ -121,20 +108,6 @@
     wget
     curl
   ];
-
-  # Git, we live for it
-  programs.git = {
-    enable = true;
-    lfs.enable = true;
-    config = {
-      init = {
-        defaultBranch = "main";
-      };
-      credential = {
-        helper = "cache";
-      };
-    };
-  };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
