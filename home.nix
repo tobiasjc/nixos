@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ config, pkgs, ... }: {
   # Allow unfree
   nixpkgs.config.allowUnfree = true;
   nixpkgs.config.allowUnfreePredicate = _: true; # for standalone software
@@ -6,6 +6,7 @@
   home = {
     packages = with pkgs; [
       home-manager
+
       # web
       (opera.override { proprietaryCodecs = true; })
       google-chrome
@@ -13,17 +14,21 @@
       tor-browser
       palemoon-bin
       netsurf.browser
+
       # mail
       thunderbird
+
       # editors
       emacs
       vscode
+
       # virtualisation
       minikube
+
       # development
       tmux
-      gitFull # for git we live
       lazygit
+      jd-gui
       jetbrains-toolbox
       gradle
       gradle-completion
@@ -34,6 +39,7 @@
       rclone
       rclone-browser
       nixpkgs-fmt
+
       # codecs
       ffmpeg
       openh264
@@ -55,9 +61,21 @@
       keepassxc
     ];
   };
-
-  # Programs configurations
   programs.home-manager.enable = true;
+
+  programs.git = {
+    enable = true;
+    lfs.enable = true;
+    extraConfig = {
+      init = {
+        defaultBranch = "main";
+      };
+      credential = {
+        helper = "cache --timeout=28800";
+      };
+    };
+  };
+
   programs.bash = {
     enable = true;
     enableCompletion = true;
@@ -67,27 +85,22 @@
     enable = true;
     settings = {
       add_newline = true;
-
       time = {
         disabled = false;
       };
-
       username = {
         disabled = false;
         show_always = true;
       };
-
       status = {
         disabled = false;
         pipestatus = true;
         map_symbol = true;
       };
-
       cmd_duration = {
         disabled = false;
         min_time = 0;
       };
-
       os = {
         disabled = false;
       };
