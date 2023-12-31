@@ -3,11 +3,9 @@
   nixpkgs.config.allowUnfree = true;
   nixpkgs.config.allowUnfreePredicate = _: true; # for standalone software
 
-  programs.home-manager.enable = true;
-  programs.bash.enable = true;
-
   home = {
     packages = with pkgs; [
+      home-manager
       # web
       (opera.override { proprietaryCodecs = true; })
       google-chrome
@@ -59,6 +57,12 @@
   };
 
   # Programs configurations
+  programs.home-manager.enable = true;
+  programs.bash = {
+    enable = true;
+    enableCompletion = true;
+  };
+
   programs.starship = {
     enable = true;
     settings = {
