@@ -5,7 +5,6 @@
     # java
     gradle
     gradle-completion
-    jdk
     ant
     jd-gui
     # zig

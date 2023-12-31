@@ -6,6 +6,5 @@
     tor-browser
     palemoon-bin
     netsurf.browser
-    aria
   ];
 }
