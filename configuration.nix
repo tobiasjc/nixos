@@ -28,7 +28,7 @@
     loader.grub = {
       enable = true;
       useOSProber = true;
-      device = "/dev/vda";
+      device = "/dev/sda";
     };
   };
 
