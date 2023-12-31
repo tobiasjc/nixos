@@ -1,6 +1,11 @@
 { config, pkgs, ... }: {
   programs.vscode = {
     enable = true;
+    package = pkgs.vscode-fhs;
+
+    mutableExtensionsDir = true;
+    enableExtensionUpdateCheck = true;
+
     extensions = with pkgs; [
       # xml
       vscode-extensions.redhat.vscode-xml
@@ -30,11 +35,24 @@
       # docker
       vscode-extensions.ms-vscode-remote.remote-containers
       vscode-extensions.ms-azuretools.vscode-docker
+      # git
+      vscode-extensions.eamodio.gitlens
       # misc
       vscode-extensions.mkhl.direnv
       vscode-extensions.hashicorp.terraform
       vscode-extensions.gruntfuggly.todo-tree
       vscode-extensions.yzhang.markdown-all-in-one
     ];
+
+    userSettings = {
+      "editor.fontSize" = 10;
+      "terminal.integrated.fontSize" = 10;
+      "[nix]"."editor.tabSize" = 2;
+      "editor.insertSpaces" = true;
+      "zig.path" = "";
+      "zig.zls.path" = "";
+      "zig.initialSetupDone" = true;
+      "extensions.ignoreRecommendations" = true;
+    };
   };
 }
