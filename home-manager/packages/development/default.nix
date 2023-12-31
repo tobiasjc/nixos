@@ -1,15 +1,20 @@
 { config, pkgs, ... }: {
   home.packages = with pkgs; [
     minikube
-    jd-gui
     jetbrains-toolbox
+    # java
     gradle
     gradle-completion
     jdk
     ant
+    jd-gui
+    # zig
     zig
     zig-shell-completions
     zls
+    # node
+    nodePackages.nodejs
+    #misc
     rclone
     rclone-browser
     nixpkgs-fmt
