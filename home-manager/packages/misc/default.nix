@@ -4,6 +4,7 @@
     tree
     kalker
     zip
+    unzip
     p7zip
     keepassxc
     drawio
