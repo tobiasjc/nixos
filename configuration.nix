@@ -12,19 +12,12 @@
   nixpkgs.config.allowUnfree = true;
   nixpkgs.config.allowUnfreePredicate = _: true; # for standalone software
 
-  # boot - loader
+  # Bootloader
   boot = {
     kernelModules = [ "kvm-amd" "kvm-intel" ];
     loader = {
-      efi = {
-        canTouchEfiVariables = true;
-        efiSysMountPoint = "/boot/efi";
-      };
-      grub = {
-        efiSupport = true;
-        useOSProber = true;
-        device = "nodev";
-      };
+      systemd-boot.enable = true;
+      efi.canTouchEfiVariables = true;
     };
   };
 
