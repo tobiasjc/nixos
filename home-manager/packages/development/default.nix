@@ -6,6 +6,7 @@
     # java
     gradle
     gradle-completion
+    maven
     ant
     jd-gui
     # zig
