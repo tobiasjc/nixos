@@ -3,6 +3,7 @@
     ./codecs
     ./cuda
     ./development
+    ./media
     ./misc
     ./web
   ];

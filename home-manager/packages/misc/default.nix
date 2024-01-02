@@ -5,10 +5,10 @@
     kalker
     zip
     unzip
+    rar
     p7zip
     keepassxc
-    drawio
     libsForQt5.yakuake
-    libsForQt5.zanshin
+    openvpn
   ];
 }
