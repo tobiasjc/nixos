@@ -1,17 +1,9 @@
 { config, pkgs, ... }: {
-  services = {
-    # Zookeeper
-    zookeeper.enable = true;
 
-    # Kafka
-    apache-kafka = {
-      enable = true;
-      settings = {
-        "log.dirs" = [ "/var/log/apache-kafka/" ];
-        "zookeeper.connect" = "localhost:" + builtins.toString config.services.zookeeper.port;
-      };
-    };
-  };
+  imports = [
+    ./zookeeper.nix
+    ./kafka.nix
+  ];
 
   systemd.services."apache-kafka" = {
     requires = [ "zookeeper.service" ];
