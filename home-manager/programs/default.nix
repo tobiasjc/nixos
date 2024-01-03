@@ -8,6 +8,7 @@
     ./git
     ./golang
     ./java
+    ./jq
     ./k9s
     ./lazygit
     ./neovim
