@@ -2,7 +2,6 @@
   imports = [
     ./dconf
     ./git
-    ./steam
     ./vim
     ./virt-manager
   ];
