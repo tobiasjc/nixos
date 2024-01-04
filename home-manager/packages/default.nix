@@ -5,6 +5,7 @@
     ./development
     ./media
     ./misc
+    ./office
     ./web
   ];
 }

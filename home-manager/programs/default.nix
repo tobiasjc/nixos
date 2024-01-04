@@ -14,6 +14,7 @@
     ./neovim
     ./obs-studio
     ./starship
+    ./texlive
     ./thunderbird
     ./vscode
     ./tmux
