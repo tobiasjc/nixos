@@ -15,6 +15,8 @@
     zls
     # node
     nodePackages.nodejs
+    # airflow
+    apache-airflow
     #misc
     rclone
     rclone-browser

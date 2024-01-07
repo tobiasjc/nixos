@@ -8,5 +8,6 @@
     "zig.zls.path" = "";
     "zig.initialSetupDone" = true;
     "extensions.ignoreRecommendations" = true;
+    "[javascript]"."editor.defaultFormatter" = "esbenp.prettier-vscode";
   };
 }
