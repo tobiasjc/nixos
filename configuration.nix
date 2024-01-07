@@ -38,7 +38,7 @@
   users.users.jtobias = {
     isNormalUser = true;
     description = "José Tobias";
-    extraGroups = [ "networkmanager" "wheel" "docker" "libvirtd" ];
+    extraGroups = [ "scanner" "lp" "networkmanager" "wheel" "docker" "libvirtd" ];
     shell = pkgs.bash;
   };
 
@@ -78,18 +78,6 @@
 
   # Configure console keymap
   console.keyMap = "br-abnt2";
-
-  # Enable CUPS to print documents.
-  services.printing = {
-    enable = true;
-    drivers = with pkgs; [ epson-escpr epson-escpr2 epsonscan2 ];
-  };
-
-  services.avahi = {
-    enable = true;
-    nssmdns4 = true;
-    openFirewall = true;
-  };
 
   # Enable sound with pipewire.
   sound.enable = true;

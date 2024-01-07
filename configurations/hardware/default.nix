@@ -2,5 +2,6 @@
   imports = [
     ./cpu
     ./nvidia
+    ./scanners
   ];
 }
