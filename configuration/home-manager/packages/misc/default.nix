@@ -14,5 +14,7 @@
     libsForQt5.filelight
     openvpn
     discord
+    path-of-building
+    xq-xml
   ];
 }

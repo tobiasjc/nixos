@@ -1,7 +1,5 @@
 { config, pkgs, ... }: {
   home.packages = with pkgs; [
-    vlc
-    gimp
-    drawio
+    nodePackages.nodejs
   ];
 }

@@ -5,7 +5,7 @@
 { config, pkgs, ... }: {
   imports = [
     ./hardware-configuration.nix
-    ./configurations
+    ./configuration/system
   ];
 
   # Allow unfree packages

@@ -1,9 +1,10 @@
 { config, pkgs, ... }: {
   imports = [
     ./avahi
+    ./cron
     ./flatpak
     ./httpd
-    ./kafka
+    # ./kafka
     ./printing
   ];
 }

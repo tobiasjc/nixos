@@ -10,6 +10,7 @@
     vscode-extensions.foxundermoon.shell-format
     vscode-extensions.timonwong.shellcheck
     # js/ts
+    vscode-extensions.dbaeumer.vscode-eslint
     vscode-extensions.esbenp.prettier-vscode
     # gitlab
     vscode-extensions.gitlab.gitlab-workflow
@@ -23,5 +24,7 @@
     vscode-extensions.hashicorp.terraform
     vscode-extensions.gruntfuggly.todo-tree
     vscode-extensions.yzhang.markdown-all-in-one
+    # ziglang
+    vscode-extensions.ziglang.vscode-zig
   ];
 }
