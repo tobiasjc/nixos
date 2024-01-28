@@ -4,7 +4,9 @@
     ./cron
     ./flatpak
     ./httpd
-    # ./kafka
+    ./kafka
+    ./postgresql
     ./printing
+    ./spark
   ];
 }

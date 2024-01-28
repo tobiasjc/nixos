@@ -1,11 +1,13 @@
 { config, pkgs, ... }: {
   imports = [
     ./build
+    ./data
     ./environment
     ./kubernetes
     ./misc
     ./node
     ./python
+    ./tests
     ./zig
   ];
 
