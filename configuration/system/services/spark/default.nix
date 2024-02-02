@@ -10,6 +10,10 @@
     worker = {
       enable = true;
       master = "127.0.0.1:7077";
+      extraEnvironment = {
+        SPARK_WORKER_CORES = 2;
+        SPARK_WORKER_MEMORY = "2g";
+      }
     };
   };
 }
