@@ -2,6 +2,7 @@
   imports = [
     ./packages
     ./programs
+    ./services
   ];
 
   programs.home-manager.enable = true;
