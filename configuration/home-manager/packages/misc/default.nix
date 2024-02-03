@@ -6,6 +6,7 @@
     xclip
     jqp
     kalker
+    gzip
     zip
     unzip
     rar
