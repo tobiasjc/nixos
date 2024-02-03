@@ -10,8 +10,6 @@
     rar
     p7zip
     keepassxc
-    libsForQt5.yakuake
-    libsForQt5.filelight
     openvpn
     discord
     path-of-building

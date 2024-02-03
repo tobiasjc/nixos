@@ -2,7 +2,6 @@
   imports = [
     ./avahi
     ./cron
-    ./flatpak
     ./httpd
     ./kafka
     ./postgresql
