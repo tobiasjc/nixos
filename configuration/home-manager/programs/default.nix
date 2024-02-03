@@ -13,6 +13,7 @@
     ./lazygit
     ./neovim
     ./obs-studio
+    ./sioyek
     ./starship
     ./texlive
     ./thunderbird
