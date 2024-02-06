@@ -12,15 +12,19 @@
   programs.thunar = {
     enable = true;
     plugins = with pkgs.xfce; [
+      tumbler
       thunar-archive-plugin
+      thunar-media-tags-plugin
       thunar-volman
     ];
   };
 
-  environment.systemPackages = with pkgs.xfce; [
-    xfce4-pulseaudio-plugin
-    xfce4-systemload-plugin
-    xfce4-cpugraph-plugin
-    xfce4-netload-plugin
+  environment.systemPackages = with pkgs; [
+    pavucontrol
+
+    xfce.xfce4-pulseaudio-plugin
+    xfce.xfce4-systemload-plugin
+    xfce.xfce4-cpugraph-plugin
+    xfce.xfce4-netload-plugin
   ];
 }

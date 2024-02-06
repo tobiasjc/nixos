@@ -13,7 +13,7 @@
       enable = true;
 
       defaultFonts = {
-        monospace = [ "CaskaydiaCove Nerd Font Mono" ];
+        monospace = [ "Mononoki Nerd Font Mono Regular" ];
       };
     };
   };
