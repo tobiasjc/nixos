@@ -1,6 +1,6 @@
 { config, pkgs, ... }: {
   programs.vscode.userSettings = {
-    "editor.fontFamily" = "'Mononoki Nert Font Mono Regular', 'monospace', monospace";
+    "editor.fontFamily" = "'RobotoMono Nerd Font Mono Regular', 'monospace', monospace";
     "editor.fontSize" = 10;
     "terminal.integrated.fontSize" = 10;
     "[nix]"."editor.tabSize" = 2;

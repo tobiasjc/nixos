@@ -13,7 +13,7 @@
       enable = true;
 
       defaultFonts = {
-        monospace = [ "Mononoki Nerd Font Mono Regular" ];
+        monospace = [ "RobotoMono Nerd Font Mono Regular" ];
       };
     };
   };
