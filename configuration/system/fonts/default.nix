@@ -8,13 +8,5 @@
       noto-fonts-emoji
       noto-fonts-color-emoji
     ];
-
-    fontconfig = {
-      enable = true;
-
-      defaultFonts = {
-        monospace = [ "RobotoMono Nerd Font Mono Regular" ];
-      };
-    };
   };
 }

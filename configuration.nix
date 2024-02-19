@@ -106,8 +106,12 @@
   programs.mtr.enable = true;
   programs.gnupg.agent = {
     enable = true;
-    enableSSHSupport = true;
-    pinentryFlavor = null;
+    pinentryFlavor = "curses";
+  };
+
+  programs.ssh = {
+    startAgent = true;
+    enableAskPassword = false;
   };
 
   # Enable the OpenSSH daemon and agent
