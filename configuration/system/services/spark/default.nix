@@ -4,7 +4,7 @@
       enable = true;
       bind = "127.0.0.1";
       extraEnvironment = {
-        SPARK_MASTER_WEBUI_PORT = "8181";
+        SPARK_MASTER_WEBUI_PORT = "7070";
       };
     };
     worker = {
