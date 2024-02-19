@@ -18,5 +18,6 @@
     path-of-building
     xq-xml
     spotify
+    youtube-dl
   ];
 }
