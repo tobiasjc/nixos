@@ -1,6 +1,6 @@
 { config, pkgs, ... }: {
   home.packages = with pkgs; [
-    ffmpeg
+    ffmpeg-full
     openh264
     mediastreamer
     mediastreamer-openh264
