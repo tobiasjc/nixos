@@ -4,7 +4,7 @@
     ./cron
     ./databases
     ./httpd
-    ./kafka
+    ./messages
     ./postgresql
     ./printing
     ./spark
