@@ -5,7 +5,9 @@
     ./development
     ./media
     ./misc
+    ./music
     ./office
+    ./vpn
     ./web
   ];
 }
