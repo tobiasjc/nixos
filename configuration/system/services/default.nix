@@ -5,6 +5,7 @@
     ./databases
     ./httpd
     ./messages
+    ./printers
     ./postgresql
     ./printing
     ./spark
