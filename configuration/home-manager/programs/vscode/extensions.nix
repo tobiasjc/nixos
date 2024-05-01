@@ -26,5 +26,8 @@
     vscode-extensions.yzhang.markdown-all-in-one
     # ziglang
     vscode-extensions.ziglang.vscode-zig
+    # scala
+    vscode-extensions.scalameta.metals
+    vscode-extensions.scala-lang.scala
   ];
 }

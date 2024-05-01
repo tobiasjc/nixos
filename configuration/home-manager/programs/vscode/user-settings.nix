@@ -1,6 +1,6 @@
 { config, pkgs, ... }: {
   programs.vscode.userSettings = {
-    "editor.fontFamily" = "'BitstromWera Nerd Font Mono Regular', 'monospace', monospace";
+    "editor.fontFamily" = "'CommitMono Nerd Font Mono Regular', 'monospace', monospace";
     "editor.fontSize" = 10;
     "terminal.integrated.fontSize" = 10;
     "[nix]"."editor.tabSize" = 2;
@@ -10,5 +10,10 @@
     "zig.initialSetupDone" = true;
     "extensions.ignoreRecommendations" = true;
     "[javascript]"."editor.defaultFormatter" = "esbenp.prettier-vscode";
+    "files.watcherExclude" = {
+      "**/.bloop" = true;
+      "**/.metals" = true;
+      "**/.ammonite" = true;
+    };
   };
 }
