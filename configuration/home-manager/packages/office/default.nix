@@ -3,5 +3,6 @@
     texstudio
     libreoffice
     libsForQt5.skanpage
+    obsidian
   ];
 }

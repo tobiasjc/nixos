@@ -9,11 +9,20 @@
   ];
 
   # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
-  nixpkgs.config.allowUnfreePredicate = _: true; # for standalone software
+  nixpkgs = {
+    config = {
+      permittedInsecurePackages = [
+        "electron-25.9.0"
+      ];
+      allowInsecure = true;
+      allowUnfree = true;
+      allowUnfreePredicate = _: true; # for standalone software
+    };
+  };
 
   # Bootloader
   boot = {
+    kernelPackages = pkgs.linuxPackages_latest;
     kernelModules = [ "kvm-amd" "kvm-intel" ];
     loader = {
       systemd-boot.enable = true;
