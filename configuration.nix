@@ -16,7 +16,10 @@
       ];
       allowInsecure = true;
       allowUnfree = true;
-      allowUnfreePredicate = _: true; # for standalone software
+
+      # easy cuda support
+      # cudnnSupport = true;
+      # cudaSupport = true;
     };
   };
 
@@ -47,7 +50,15 @@
   users.users.jtobias = {
     isNormalUser = true;
     description = "José Tobias";
-    extraGroups = [ "scanner" "lp" "networkmanager" "wheel" "docker" "libvirtd" ];
+    extraGroups = [
+      "scanner"
+      "lp"
+      "networkmanager"
+      "wheel"
+      "docker"
+      "libvirtd"
+      "vboxusers"
+    ];
     shell = pkgs.bash;
   };
 
@@ -75,8 +86,10 @@
 
   # Configure keyboard
   services.xserver = {
-    layout = "br";
-    xkbVariant = "";
+    xkb = {
+      layout = "br";
+      variant = "";
+    };
     autoRepeatDelay = 250;
     autoRepeatInterval = 30;
   };
@@ -94,7 +107,7 @@
     alsa.support32Bit = true;
     pulse.enable = true;
     # If you want to use JACK applications, uncomment this
-    jack.enable = true;
+    # jack.enable = true;
 
     # use the example session manager (no others are packaged yet so this is enabled by default,
     # no need to redefine it in your config for now)
@@ -115,7 +128,7 @@
   programs.mtr.enable = true;
   programs.gnupg.agent = {
     enable = true;
-    pinentryFlavor = "curses";
+    pinentryPackage = pkgs.pinentry-curses;
   };
 
   programs.ssh = {

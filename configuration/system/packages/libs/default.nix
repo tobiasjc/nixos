@@ -1,0 +1,31 @@
+{ config, pkgs, ... }: {
+  environment.systemPackages = with pkgs; [
+    libllvm
+    zlib
+    zlib.dev
+    xz
+    xz.dev
+    readline
+    readline.dev
+    sqlite
+    sqlite.dev
+    sqlite-utils
+    libz
+    libz.dev
+    ncurses
+    ncurses.dev
+    ncurses5
+    ncurses5.dev
+    libxml2
+    libxml2.dev
+    libffi
+    libffi.dev
+    lzlib
+    xml2
+    libxml2
+    libxml2.dev
+    xmlsec
+    xmlsec.dev
+    pkg-config
+  ];
+}

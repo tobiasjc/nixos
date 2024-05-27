@@ -6,8 +6,6 @@
     ./httpd
     ./messages
     ./printers
-    ./postgresql
-    ./printing
     ./spark
   ];
 }

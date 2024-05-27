@@ -1,8 +1,11 @@
 { config, pkgs, ... }: {
   imports = [
-    ./packages
-    ./programs
-    ./services
+    ./development
+    ./media
+    ./misc
+    ./office
+    ./system
+    ./web
   ];
 
   programs.home-manager.enable = true;

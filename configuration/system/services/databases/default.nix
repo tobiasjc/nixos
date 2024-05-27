@@ -1,6 +1,7 @@
 { config, pkgs, ... }: {
   imports = [
-    ./postgresql
+    ./ferretdb
     ./mysql
+    ./postgresql
   ];
 }

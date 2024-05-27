@@ -1,7 +1,7 @@
 { config, pkgs, ... }: {
   imports = [
-    ./docker
-    ./libvirtd
-    ./virtualbox
+    ./eclipse
+    ./neovim
+    ./vscode
   ];
 }
