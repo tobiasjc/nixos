@@ -3,7 +3,7 @@
     enable = true;
     lfs.enable = true;
 
-    delta = {
+    diff-so-fancy = {
       enable = true;
     };
 
