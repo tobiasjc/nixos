@@ -2,6 +2,11 @@
   programs.git = {
     enable = true;
     lfs.enable = true;
+
+    delta = {
+      enable = true;
+    };
+
     extraConfig = {
       init = {
         defaultBranch = "main";
@@ -13,8 +18,4 @@
   };
 
   programs.lazygit.enable = true;
-
-  home.packages = with pkgs; [
-    meld
-  ];
 }
