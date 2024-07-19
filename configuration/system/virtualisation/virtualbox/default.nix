@@ -1,5 +1,7 @@
 { config, pkgs, ... }: {
-  environment.systemPackages = with pkgs; [
-    virtualbox
-  ];
+  virtualisation.virtualbox = {
+    guest = {
+      enable = true;
+    };
+  };
 }
