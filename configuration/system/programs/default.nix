@@ -2,6 +2,7 @@
   imports = [
     ./dconf
     ./printers
+    # ./steam
     ./vim
     ./virt-manager
   ];
