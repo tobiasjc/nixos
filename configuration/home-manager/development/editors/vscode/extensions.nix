@@ -26,7 +26,9 @@
     vscode-extensions.hashicorp.terraform
     vscode-extensions.gruntfuggly.todo-tree
     vscode-extensions.yzhang.markdown-all-in-one
-    # ziglang
-    vscode-extensions.ziglang.vscode-zig
+
+    # theme
+    vscode-extensions.catppuccin.catppuccin-vsc
+    vscode-extensions.catppuccin.catppuccin-vsc-icons
   ];
 }

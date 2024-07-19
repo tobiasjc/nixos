@@ -8,13 +8,5 @@
     withRuby = true;
     withPython3 = true;
     withNodeJs = true;
-
-    coc = {
-      enable = true;
-    };
-
-    extraConfig = ''
-      colorscheme koehler
-    '';
   };
 }

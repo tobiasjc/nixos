@@ -1,7 +1,8 @@
 { config, pkgs, ... }: {
   programs.vscode.userSettings = {
     # theme
-    "workbench.colorTheme" = "Ayu Dark Bordered";
+    "workbench.colorTheme" = "Catppuccin Mocha";
+    "workbench.iconTheme" = "catppuccin-mocha";
 
     # global editor
     "editor.fontFamily" = "'CommitMono Nerd Font Mono Regular', 'monospace', monospace";
@@ -14,10 +15,9 @@
 
     # terminal
     "terminal.integrated.fontSize" = 10;
+    "terminal.integrated.fontFamily" = "'IntoneMono Nerd Font Mono Regular', 'monospace', monospace";
 
-    # languages
-    "zig.path" = "";
-    "zig.zls.path" = "";
-    "zig.initialSetupDone" = true;
+    # markdown
+    "markdown-preview-enhanced.previewTheme" = "github-dark.css";
   };
 }

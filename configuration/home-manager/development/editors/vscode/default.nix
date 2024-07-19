@@ -7,7 +7,7 @@
 
   programs.vscode = {
     enable = true;
-    package = pkgs.vscode-fhs;
+    package = pkgs.vscode;
     mutableExtensionsDir = true;
     enableExtensionUpdateCheck = true;
   };
