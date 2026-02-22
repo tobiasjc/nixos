@@ -1,6 +1,6 @@
 { config, pkgs, ... }:
 {
-  services.xserver = {
+  services = {
     displayManager.sddm = {
       enable = true;
     };
