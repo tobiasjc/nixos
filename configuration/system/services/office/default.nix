@@ -1,6 +1,6 @@
 { config, pkgs, ... }:
 {
   imports = [
-    ./onlyoffice
+    # ./onlyoffice
   ];
 }
