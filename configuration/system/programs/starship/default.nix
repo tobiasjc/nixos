@@ -8,7 +8,7 @@
     settings = {
       add_newline = true;
       character = {
-        succes_symbol = "[\$](bold green)";
+        success_symbol = "[\$](bold green)";
         error_symbol = "[\$](bold red)";
       };
       username = {
