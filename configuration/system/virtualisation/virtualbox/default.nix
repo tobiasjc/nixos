@@ -1,9 +1,15 @@
 { config, pkgs, ... }:
 {
   virtualisation.virtualbox = {
-    enableKvm = false;
+    host = {
+      enableKvm = false;
+      enableExtensionPack = true;
+      enable = true;
+    };
+
     guest = {
       enable = true;
+      dragAndDrop = true;
     };
   };
 }
