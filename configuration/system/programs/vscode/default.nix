@@ -4,7 +4,7 @@
     enable = true;
     extensions = with pkgs.vscode-extensions; [
       # bash
-      vscode-extensions.mads-hartmann.bash-ide-vscode
+      mads-hartmann.bash-ide-vscode
       timonwong.shellcheck
       foxundermoon.shell-format
 
