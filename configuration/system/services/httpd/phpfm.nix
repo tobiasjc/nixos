@@ -7,7 +7,7 @@
     '';
 
     pools.localhost = {
-      user = "jtobias";
+      user = "josetobias";
       group = "users";
 
       settings = {

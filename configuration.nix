@@ -54,7 +54,7 @@
   networking.networkmanager.enable = true;
 
   # Define MY user account. Don't forget to set a password with ‘passwd’.
-  users.users.jtobias = {
+  users.users.josetobias = {
     isNormalUser = true;
     description = "José Tobias";
     extraGroups = [
