@@ -1,4 +1,5 @@
-{ config, pkgs, ... }: {
+{ config, pkgs, ... }:
+{
   services.phpfpm = {
     phpOptions = ''
       extension=${pkgs.phpExtensions.apcu}/lib/php/extensions/apcu.so

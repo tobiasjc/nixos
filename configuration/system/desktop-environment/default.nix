@@ -1,6 +1,7 @@
-{ config, pkgs, ... }: {
+{ config, pkgs, ... }:
+{
   imports = [
-    # ./kde
-    ./xfce4
+    ./kde
+    # ./xfce4
   ];
 }

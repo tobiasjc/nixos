@@ -1,9 +1,6 @@
 { config, pkgs, ... }:
 {
   environment.systemPackages = with pkgs; [
-    xorg.xkill
-    openfortivpn
-    asdf-vm
-    stow
+    jetbrains-toolbox
   ];
 }

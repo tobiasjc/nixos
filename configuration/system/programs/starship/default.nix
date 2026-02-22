@@ -1,0 +1,37 @@
+{ config, pkgs, ... }:
+{
+  programs.starship = {
+    enable = true;
+
+    presets = [ ];
+
+    settings = {
+      add_newline = true;
+      character = {
+        succes_symbol = "[\$](bold green)";
+        error_symbol = "[\$](bold red)";
+      };
+      username = {
+        show_always = true;
+        disabled = false;
+      };
+      hostname = {
+        ssh_only = false;
+        disabled = false;
+      };
+      time = {
+        disabled = false;
+      };
+      status = {
+        disabled = false;
+        pipestatus = true;
+      };
+      shlvl = {
+        disabled = false;
+        format = "$shlvl levels(s) down";
+        threshold = 3;
+        repeat = true;
+      };
+    };
+  };
+}

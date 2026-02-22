@@ -1,4 +1,5 @@
-{ config, pkgs, ... }: {
+{ config, pkgs, ... }:
+{
   imports = [
     ./avahi
     ./cron
@@ -7,5 +8,7 @@
     ./messages
     ./printers
     ./spark
+    ./office
+    ./flatpak
   ];
 }

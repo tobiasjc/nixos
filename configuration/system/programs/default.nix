@@ -1,9 +1,13 @@
-{ config, pkgs, ... }: {
+{ config, pkgs, ... }:
+{
   imports = [
     ./dconf
     ./printers
-    # ./steam
     ./vim
     ./virt-manager
+    ./vscode
+    ./git
+    ./lazygit
+    ./starship
   ];
 }

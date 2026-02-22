@@ -1,4 +1,5 @@
-{ config, pkgs, ... }: {
+{ config, pkgs, ... }:
+{
   virtualisation.docker = {
     enable = true;
     # only if you're using btrfs!

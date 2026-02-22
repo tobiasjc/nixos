@@ -1,3 +1,4 @@
-{ config, pkgs, ... }: {
+{ config, pkgs, ... }:
+{
   services.cron.enable = true;
 }

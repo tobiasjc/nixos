@@ -1,7 +1,8 @@
-{ config, pkgs, ... }: {
+{ config, pkgs, ... }:
+{
   imports = [
     ./docker
     ./libvirtd
-    # ./virtualbox
+    ./virtualbox
   ];
 }

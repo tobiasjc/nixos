@@ -1,7 +1,6 @@
 { config, pkgs, ... }:
 {
-  services.mysql = {
+  programs.git = {
     enable = true;
-    package = pkgs.mariadb;
   };
 }

@@ -1,7 +1,6 @@
 { config, pkgs, ... }:
 {
-  services.mysql = {
+  services.onlyoffice = {
     enable = true;
-    package = pkgs.mariadb;
   };
 }
