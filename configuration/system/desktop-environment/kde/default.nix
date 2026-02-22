@@ -5,7 +5,7 @@
       enable = true;
     };
 
-    desktopManager.plasma5 = {
+    desktopManager.plasma6 = {
       enable = true;
     };
   };
