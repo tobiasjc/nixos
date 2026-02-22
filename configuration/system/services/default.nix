@@ -10,5 +10,6 @@
     ./spark
     ./office
     ./flatpak
+    ./zookeeper
   ];
 }

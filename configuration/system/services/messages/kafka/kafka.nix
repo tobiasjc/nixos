@@ -4,7 +4,9 @@
     enable = true;
     settings = {
       "log.dirs" = [ "/var/log/apache-kafka/" ];
-      "zookeeper.connect" = "localhost:" + builtins.toString config.services.zookeeper.port;
+      "process.roles" = "broker,controller";
     };
   };
+
+  environment.systemPackages = with pkgs; [ kafkactl ];
 }
