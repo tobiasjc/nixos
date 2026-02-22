@@ -2,5 +2,6 @@
 {
   environment.systemPackages = with pkgs; [
     jetbrains-toolbox
+    javaPackages.compiler.temurin-bin.jdk-21
   ];
 }
