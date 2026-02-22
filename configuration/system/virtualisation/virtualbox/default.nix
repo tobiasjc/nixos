@@ -2,7 +2,7 @@
 {
   virtualisation.virtualbox = {
     guest = {
-      enable = true;
+      enable = false;
       dragAndDrop = true;
       clipboard = true;
       use3rdPartyModules = true;
