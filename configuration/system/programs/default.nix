@@ -10,5 +10,6 @@
     ./lazygit
     ./starship
     ./direnv
+    ./bash
   ];
 }
