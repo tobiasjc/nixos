@@ -12,9 +12,6 @@
   # Allow unfree packages
   nixpkgs = {
     config = {
-      permittedInsecurePackages = [
-        "electron-25.9.0"
-      ];
       allowInsecure = true;
       allowUnfree = true;
 
@@ -37,21 +34,16 @@
     };
   };
 
-  networking.hostName = "nixos"; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+  # network
+  networking.hostName = "nixos";
+  networking.wireless.enable = true;
+  networking.networkmanager.enable = true;
 
   # Allow experimental features by default
   nix.settings.experimental-features = [
     "nix-command"
     "flakes"
   ];
-
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
-  # Enable networking
-  networking.networkmanager.enable = true;
 
   # Define MY user account. Don't forget to set a password with ‘passwd’.
   users.users.josetobias = {
@@ -91,42 +83,22 @@
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
-  # Configure keyboard
+  # xserver keyboard
   services.xserver = {
     xkb = {
       layout = "br";
       variant = "";
     };
-    autoRepeatDelay = 250;
+    autoRepeatDelay = 150;
     autoRepeatInterval = 30;
   };
 
-  # Configure console keymap
   console.keyMap = "br-abnt2";
-
-  # Enable sound with pipewire
-  hardware.alsa = {
-    enable = true;
-  };
-  services.pulseaudio.enable = false;
   security.rtkit.enable = true;
-
-  # Enable touchpad support (enabled default in most desktopManager).
-  # services.xserver.libinput.enable = true;
-
-  # List packages installed in system profile. To search, run:
-  environment.systemPackages = with pkgs; [
-    wget
-    curl
-  ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   programs.mtr.enable = true;
-  programs.gnupg.agent = {
-    enable = true;
-    pinentryPackage = pkgs.pinentry-curses;
-  };
 
   programs.ssh = {
     startAgent = true;
@@ -135,12 +107,6 @@
 
   # Enable the OpenSSH daemon and agent
   services.openssh.enable = true;
-
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

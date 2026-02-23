@@ -11,5 +11,6 @@
     ./starship
     ./direnv
     ./bash
+    ./browsers
   ];
 }
