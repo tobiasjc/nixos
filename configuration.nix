@@ -16,8 +16,8 @@
       allowUnfree = true;
 
       # easy cuda support
-      cudnnSupport = true;
-      cudaSupport = true;
+      # cudnnSupport = true;
+      # cudaSupport = true;
     };
   };
 
