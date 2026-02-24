@@ -6,7 +6,7 @@
 {
   imports = [
     ./hardware-configuration.nix
-    ./configuration/system
+    ./configuration
   ];
 
   # Allow unfree packages
@@ -36,7 +36,6 @@
 
   # network
   networking.hostName = "nixos";
-  networking.wireless.enable = true;
   networking.networkmanager.enable = true;
 
   # Allow experimental features by default
